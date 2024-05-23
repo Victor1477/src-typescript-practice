@@ -1,53 +1,25 @@
 console.clear();
 
-export class Node<T> {
-  value: T;
-  next: Node<T>;
-  constructor(value: T) {
-    this.value = value;
-  }
+const array = [8, 6, 5, 4, 3, 6, 7, 9];
+
+function swap(array: any[], i: number, j: number) {
+  let current = array[i];
+  array[i] = array[j];
+  array[j] = current;
 }
 
-export class SinglyLinkedList<T> {
-  private length: number;
-  private head: Node<T> | null;
-  private tail: Node<T> | null;
-
-  constructor() {
-    this.length = 0;
-    this.head = null;
-    this.tail = null;
-  }
-
-  push(value: T) {
-    const item = new Node(value);
-    if (this.length === 0) {
-      this.head = item;
-      this.tail = item;
-    } else {
-      this.tail!.next = item;
-      this.tail = item;
-    }
-    this.length++;
-  }
-
-  foreach(callback: (value: T) => void) {
-    let currentLength = 0;
-    let currentItem = this.head;
-    while (this.length > currentLength) {
-      currentLength++;
-      callback(currentItem!.value);
-      currentItem = currentItem!.next;
+function selectionSort(array: any[]) {
+  for (let i = 0; i < array.length; i++) {
+    let smallest = i;
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[j] < array[smallest]) {
+        swap(array, smallest, j);
+      }
     }
   }
+  return array;
 }
 
-const list = new SinglyLinkedList<number>();
+selectionSort(array);
 
-for (let i = 0; i <= 1000; i++) {
-  list.push(i);
-}
-
-list.foreach((val) => {
-  console.log(val);
-});
+console.log(array);

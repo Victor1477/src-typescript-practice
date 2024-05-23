@@ -1,46 +1,21 @@
+"use strict";
 console.clear();
-export class Node {
-    value;
-    next;
-    constructor(value) {
-        this.value = value;
-    }
+const array = [8, 6, 5, 4, 3, 6, 7, 9];
+function swap(array, i, j) {
+    let current = array[i];
+    array[i] = array[j];
+    array[j] = current;
 }
-export class SinglyLinkedList {
-    length;
-    head;
-    tail;
-    constructor() {
-        this.length = 0;
-        this.head = null;
-        this.tail = null;
-    }
-    push(value) {
-        const item = new Node(value);
-        if (this.length === 0) {
-            this.head = item;
-            this.tail = item;
-        }
-        else {
-            this.tail.next = item;
-            this.tail = item;
-        }
-        this.length++;
-    }
-    foreach(callback) {
-        let currentLength = 0;
-        let currentItem = this.head;
-        while (this.length > currentLength) {
-            currentLength++;
-            callback(currentItem.value);
-            currentItem = currentItem.next;
+function selectionSort(array) {
+    for (let i = 0; i < array.length; i++) {
+        let smallest = i;
+        for (let j = i + 1; j < array.length; j++) {
+            if (array[j] < array[smallest]) {
+                swap(array, smallest, j);
+            }
         }
     }
+    return array;
 }
-const list = new SinglyLinkedList();
-for (let i = 0; i <= 1000; i++) {
-    list.push(i);
-}
-list.foreach((val) => {
-    console.log(val);
-});
+selectionSort(array);
+console.log(array);
