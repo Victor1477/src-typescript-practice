@@ -6,16 +6,18 @@ function swap(array, i, j) {
     array[i] = array[j];
     array[j] = current;
 }
-function selectionSort(array) {
-    for (let i = 0; i < array.length; i++) {
-        let smallest = i;
-        for (let j = i + 1; j < array.length; j++) {
-            if (array[j] < array[smallest]) {
-                swap(array, smallest, j);
+function bubbleSort(array) {
+    let isSorted = false;
+    while (!isSorted) {
+        isSorted = true;
+        for (let i = 0; i < array.length - 1; i++) {
+            if (array[i] > array[i + 1]) {
+                swap(array, i, i + 1);
+                isSorted = false;
             }
         }
     }
     return array;
 }
-selectionSort(array);
+bubbleSort(array);
 console.log(array);
