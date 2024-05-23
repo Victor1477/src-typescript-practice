@@ -1,26 +1,53 @@
-import express from "express";
-import { join } from "path";
-
 console.clear();
-const app = express();
 
-enum ServerConfiguration {
-  PORT = 4200,
-  ROOT_DIR = "/opt/projects/src-typescript-practice/dist/app",
+export class Node<T> {
+  value: T;
+  next: Node<T>;
+  constructor(value: T) {
+    this.value = value;
+  }
 }
 
-app.use("/", express.static(ServerConfiguration.ROOT_DIR));
+export class SinglyLinkedList<T> {
+  private length: number;
+  private head: Node<T> | null;
+  private tail: Node<T> | null;
 
-app.use("/home", (req, res, next) => {
-  res.sendFile(join(ServerConfiguration.ROOT_DIR, "index.html"));
-  next();
-});
+  constructor() {
+    this.length = 0;
+    this.head = null;
+    this.tail = null;
+  }
 
-app.use("", (req, res, next) => {
-  res.redirect("/home");
-  next();
-});
+  push(value: T) {
+    const item = new Node(value);
+    if (this.length === 0) {
+      this.head = item;
+      this.tail = item;
+    } else {
+      this.tail!.next = item;
+      this.tail = item;
+    }
+    this.length++;
+  }
 
-app.listen(ServerConfiguration.PORT, () => {
-  console.log("Server listening on port: " + ServerConfiguration.PORT);
+  foreach(callback: (value: T) => void) {
+    let currentLength = 0;
+    let currentItem = this.head;
+    while (this.length > currentLength) {
+      currentLength++;
+      callback(currentItem!.value);
+      currentItem = currentItem!.next;
+    }
+  }
+}
+
+const list = new SinglyLinkedList<number>();
+
+for (let i = 0; i <= 1000; i++) {
+  list.push(i);
+}
+
+list.foreach((val) => {
+  console.log(val);
 });
