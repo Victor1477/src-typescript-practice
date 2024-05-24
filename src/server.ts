@@ -32,6 +32,9 @@ export class SinglyLinkedList<T> {
   }
 
   pop() {
+    if (this.length == 0) {
+      return null;
+    }
     let previous: Node<T>;
     let last: Node<T> | null;
     this.foreachNode((node) => {
@@ -65,9 +68,9 @@ export class SinglyLinkedList<T> {
 
 const list = new SinglyLinkedList<number>();
 
-for (let i = 0; i <= 1000; i++) {
-  list.push(i);
-}
+// for (let i = 0; i <= 1000; i++) {
+//   list.push(i);
+// }
 
 list.foreach((val) => {
   console.log(val);
