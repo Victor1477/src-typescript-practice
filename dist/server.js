@@ -56,6 +56,18 @@ export class SinglyLinkedList {
         }
         return current.value;
     }
+    unshift(value) {
+        const item = new Node(value);
+        if (this.length === 0) {
+            this.head = item;
+            this.tail = item;
+        }
+        else {
+            item.next = this.head;
+            this.head = item;
+        }
+        this.length++;
+    }
     foreach(callback) {
         let currentItem = this.head;
         while (currentItem) {
@@ -66,7 +78,7 @@ export class SinglyLinkedList {
 }
 const list = new SinglyLinkedList();
 for (let i = 0; i <= 10; i++) {
-    list.push(i);
+    list.unshift(i);
 }
 list.foreach((val) => {
     console.log(val);
