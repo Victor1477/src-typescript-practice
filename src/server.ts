@@ -40,6 +40,7 @@ export class SinglyLinkedList<T> {
     if (this.length === 1) {
       last = this.head;
       this.head = null;
+      this.tail = null;
       this.length--;
     }
     this.foreachNode((node) => {
@@ -48,6 +49,7 @@ export class SinglyLinkedList<T> {
       } else {
         last = previous.next;
         previous.next = null;
+        this.tail = previous;
         this.length--;
       }
     });
