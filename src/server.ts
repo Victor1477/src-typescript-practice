@@ -79,6 +79,16 @@ export class SinglyLinkedList<T> {
       currentItem = currentItem.next;
     }
   }
+
+  find(callback: (value: T) => boolean) {
+    let currentItem = this.head;
+    while (currentItem) {
+      if (callback(currentItem.value)) {
+        return currentItem.value;
+      }
+      currentItem = currentItem.next;
+    }
+  }
 }
 
 const list = new SinglyLinkedList<number>();
@@ -91,5 +101,7 @@ list.foreach((val) => {
   console.log(val);
 });
 
-console.log(list.shift());
-console.log(list.shift());
+// console.log(list.shift());
+// console.log(list.shift());
+
+// console.log(list.find((value) => value === 3));

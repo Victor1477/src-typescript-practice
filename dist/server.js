@@ -75,6 +75,15 @@ export class SinglyLinkedList {
             currentItem = currentItem.next;
         }
     }
+    find(callback) {
+        let currentItem = this.head;
+        while (currentItem) {
+            if (callback(currentItem.value)) {
+                return currentItem.value;
+            }
+            currentItem = currentItem.next;
+        }
+    }
 }
 const list = new SinglyLinkedList();
 for (let i = 0; i <= 10; i++) {
@@ -83,5 +92,6 @@ for (let i = 0; i <= 10; i++) {
 list.foreach((val) => {
     console.log(val);
 });
-console.log(list.shift());
-console.log(list.shift());
+// console.log(list.shift());
+// console.log(list.shift());
+// console.log(list.find((value) => value === 3));
