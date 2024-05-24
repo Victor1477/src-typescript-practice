@@ -28,41 +28,27 @@ export class SinglyLinkedList {
         this.length++;
     }
     pop() {
-        if (this.length === 0) {
-            return null;
+        if (this.length === 0)
+            return undefined;
+        let currentItem = this.head;
+        let previous = this.head;
+        while (currentItem?.next) {
+            previous = currentItem;
+            currentItem = currentItem.next;
         }
-        let previous;
-        let last;
-        if (this.length === 1) {
-            last = this.head;
+        previous.next = null;
+        this.tail = previous;
+        this.length--;
+        if (this.length === 0) {
             this.head = null;
             this.tail = null;
-            this.length--;
         }
-        this.foreachNode((node) => {
-            if (node.next) {
-                previous = node;
-            }
-            else {
-                last = previous.next;
-                previous.next = null;
-                this.tail = previous;
-                this.length--;
-            }
-        });
-        return last.value;
+        return currentItem.value;
     }
     foreach(callback) {
         let currentItem = this.head;
         while (currentItem) {
             callback(currentItem.value);
-            currentItem = currentItem.next;
-        }
-    }
-    foreachNode(callback) {
-        let currentItem = this.head;
-        while (currentItem) {
-            callback(currentItem);
             currentItem = currentItem.next;
         }
     }
@@ -74,5 +60,3 @@ for (let i = 0; i <= 1000; i++) {
 list.foreach((val) => {
     console.log(val);
 });
-console.log(list.pop());
-console.log(list.pop());
