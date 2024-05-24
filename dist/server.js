@@ -28,11 +28,16 @@ export class SinglyLinkedList {
         this.length++;
     }
     pop() {
-        if (this.length == 0) {
+        if (this.length === 0) {
             return null;
         }
         let previous;
         let last;
+        if (this.length === 1) {
+            last = this.head;
+            this.head = null;
+            this.length--;
+        }
         this.foreachNode((node) => {
             if (node.next) {
                 previous = node;
