@@ -47,22 +47,18 @@ export class SinglyLinkedList<T> {
   }
 
   foreach(callback: (value: T) => void) {
-    let currentLength = 0;
     let currentItem = this.head;
-    while (this.length > currentLength) {
-      currentLength++;
-      callback(currentItem!.value);
-      currentItem = currentItem!.next;
+    while (currentItem) {
+      callback(currentItem.value);
+      currentItem = currentItem.next;
     }
   }
 
   private foreachNode(callback: (node: Node<T>) => void) {
-    let currentLength = 0;
     let currentItem = this.head;
-    while (this.length > currentLength) {
-      currentLength++;
-      callback(currentItem!);
-      currentItem = currentItem!.next;
+    while (currentItem) {
+      callback(currentItem);
+      currentItem = currentItem.next;
     }
   }
 }

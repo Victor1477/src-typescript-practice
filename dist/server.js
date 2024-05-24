@@ -43,19 +43,15 @@ export class SinglyLinkedList {
         return last.value;
     }
     foreach(callback) {
-        let currentLength = 0;
         let currentItem = this.head;
-        while (this.length > currentLength) {
-            currentLength++;
+        while (currentItem) {
             callback(currentItem.value);
             currentItem = currentItem.next;
         }
     }
     foreachNode(callback) {
-        let currentLength = 0;
         let currentItem = this.head;
-        while (this.length > currentLength) {
-            currentLength++;
+        while (currentItem) {
             callback(currentItem);
             currentItem = currentItem.next;
         }
