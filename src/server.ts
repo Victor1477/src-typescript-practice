@@ -10,10 +10,9 @@ function swap(array: any[], i: number, j: number) {
 
 function selectionSort(array: any[]) {
   for (let i = 0; i < array.length; i++) {
-    let smallest = i;
     for (let j = i + 1; j < array.length; j++) {
-      if (array[j] < array[smallest]) {
-        swap(array, smallest, j);
+      if (array[j] < array[i]) {
+        swap(array, i, j);
       }
     }
   }
