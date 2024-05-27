@@ -78,11 +78,25 @@ export class SinglyLinkedList<T> {
     }
     let iteration = 0;
     let currentItem = this.head;
-    while (iteration != index) {
+    while (iteration !== index) {
       currentItem = currentItem!.next;
       iteration++;
     }
-    return currentItem?.value;
+    return currentItem!.value;
+  }
+
+  set(index: number, value: T) {
+    if (index < 0 || index >= this.length) {
+      return false;
+    }
+    let iteration = 0;
+    let currentItem = this.head;
+    while (iteration !== index) {
+      currentItem = currentItem!.next;
+      iteration++;
+    }
+    currentItem!.value = value;
+    return true;
   }
 
   foreach(callback: (value: T) => void) {
