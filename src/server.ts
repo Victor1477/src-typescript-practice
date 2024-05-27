@@ -72,6 +72,19 @@ export class SinglyLinkedList<T> {
     this.length++;
   }
 
+  get(index: number) {
+    if (index > this.length - 1) {
+      return null;
+    }
+    let iteration = 0;
+    let currentItem = this.head;
+    while (iteration != index) {
+      currentItem = currentItem!.next;
+      iteration++;
+    }
+    return currentItem?.value;
+  }
+
   foreach(callback: (value: T) => void) {
     let currentItem = this.head;
     while (currentItem) {
@@ -93,15 +106,10 @@ export class SinglyLinkedList<T> {
 
 const list = new SinglyLinkedList<number>();
 
-for (let i = 0; i <= 10; i++) {
+for (let i = 0; i <= 1000; i++) {
   list.unshift(i);
 }
 
 list.foreach((val) => {
   console.log(val);
 });
-
-// console.log(list.shift());
-// console.log(list.shift());
-
-// console.log(list.find((value) => value === 3));
