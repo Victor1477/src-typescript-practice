@@ -69,7 +69,7 @@ export class SinglyLinkedList {
         this.length++;
     }
     get(index) {
-        if (index === 0 || index >= this.length) {
+        if (index < 0 || index >= this.length) {
             return null;
         }
         let iteration = 0;

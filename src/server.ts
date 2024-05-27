@@ -73,7 +73,7 @@ export class SinglyLinkedList<T> {
   }
 
   get(index: number) {
-    if (index === 0 || index >= this.length) {
+    if (index < 0 || index >= this.length) {
       return null;
     }
     let iteration = 0;
