@@ -29,6 +29,7 @@ export class SinglyLinkedList<T> {
       this.tail = item;
     }
     this.length++;
+    return true;
   }
 
   pop() {
@@ -70,6 +71,7 @@ export class SinglyLinkedList<T> {
       this.head = item;
     }
     this.length++;
+    return true;
   }
 
   get(index: number) {
@@ -99,7 +101,30 @@ export class SinglyLinkedList<T> {
     return true;
   }
 
-  foreach(callback: (value: T) => void) {
+  insert(index: number, value: T) {
+    if (index < 0 || index > this.length) {
+      return null;
+    }
+    if (index === 0) {
+      return this.unshift(value);
+    }
+    if (index === this.length) {
+      return this.push(value);
+    }
+
+    let iteration = 0;
+    let currentItem = this.head;
+    while (iteration !== index - 1) {
+      currentItem = currentItem!.next;
+      iteration++;
+    }
+    const node = new Node(value);
+    node.next = currentItem!.next;
+    currentItem!.next = node;
+    return true;
+  }
+
+  forEach(callback: (value: T) => void) {
     let currentItem = this.head;
     while (currentItem) {
       callback(currentItem.value);
@@ -120,10 +145,12 @@ export class SinglyLinkedList<T> {
 
 const list = new SinglyLinkedList<number>();
 
-for (let i = 0; i <= 1000; i++) {
+for (let i = 0; i <= 5; i++) {
   list.unshift(i);
 }
 
-list.foreach((val) => {
+list.forEach((val) => {
   console.log(val);
 });
+
+console.log("\n");
