@@ -114,6 +114,7 @@ export class SinglyLinkedList {
         const node = new Node(value);
         node.next = currentItem.next;
         currentItem.next = node;
+        this.length++;
         return true;
     }
     forEach(callback) {
