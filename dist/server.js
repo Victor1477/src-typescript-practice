@@ -72,7 +72,7 @@ export class SinglyLinkedList {
     }
     get(index) {
         if (index < 0 || index >= this.length) {
-            return null;
+            return undefined;
         }
         let iteration = 0;
         let currentItem = this.head;
@@ -97,7 +97,7 @@ export class SinglyLinkedList {
     }
     insert(index, value) {
         if (index < 0 || index > this.length) {
-            return null;
+            return undefined;
         }
         if (index === 0) {
             return this.unshift(value);
@@ -116,6 +116,27 @@ export class SinglyLinkedList {
         currentItem.next = node;
         this.length++;
         return true;
+    }
+    remove(index) {
+        if (index < 0 || index >= this.length) {
+            return undefined;
+        }
+        else if (index === 0) {
+            return this.shift();
+        }
+        else if (index === this.length - 1) {
+            return this.pop();
+        }
+        let iteration = 0;
+        let currentItem = this.head;
+        while (iteration !== index - 1) {
+            currentItem = currentItem.next;
+            iteration++;
+        }
+        let removedItem = currentItem.next;
+        currentItem.next = removedItem.next;
+        this.length--;
+        return removedItem.value;
     }
     forEach(callback) {
         let currentItem = this.head;
