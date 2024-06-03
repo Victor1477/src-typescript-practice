@@ -138,6 +138,19 @@ export class SinglyLinkedList {
         this.length--;
         return removedItem.value;
     }
+    reverse() {
+        let node = this.head;
+        let previous = null;
+        let next;
+        this.head = this.tail;
+        this.tail = node;
+        for (let i = 0; i < this.length; i++) {
+            next = node.next;
+            node.next = previous;
+            previous = node;
+            node = next;
+        }
+    }
     forEach(callback) {
         let currentItem = this.head;
         while (currentItem) {
@@ -156,9 +169,10 @@ export class SinglyLinkedList {
     }
 }
 const list = new SinglyLinkedList();
-for (let i = 0; i <= 5; i++) {
-    list.unshift(i);
+for (let i = 0; i <= 50; i++) {
+    list.push(i);
 }
+list.reverse();
 list.forEach((val) => {
     console.log(val);
 });
