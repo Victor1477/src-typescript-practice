@@ -146,16 +146,16 @@ export class SinglyLinkedList<T> {
   }
 
   reverse() {
-    let node = this.head;
+    let current = this.head;
     let previous = null;
     let next;
     this.head = this.tail;
-    this.tail = node;
-    for (let i = 0; i < this.length; i++) {
-      next = node!.next;
-      node!.next = previous;
-      previous = node;
-      node = next;
+    this.tail = current;
+    while (current) {
+      next = current!.next;
+      current!.next = previous;
+      previous = current;
+      current = next;
     }
   }
 
@@ -180,7 +180,7 @@ export class SinglyLinkedList<T> {
 
 const list = new SinglyLinkedList<number>();
 
-for (let i = 0; i <= 50; i++) {
+for (let i = 0; i <= 10; i++) {
   list.push(i);
 }
 
