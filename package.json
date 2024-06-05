@@ -6,7 +6,7 @@
   "main": "dist/server.js",
   "scripts": {
     "build": "tsc --watch",
-    "start": "nodemon dist/server.js",
+    "start": "export NODE_OPTIONS=--max_old_space_size=4096 && nodemon dist/server.js",
     "server": "tsc && node dist/server.js"
   },
   "author": "Joao Oliveira",
