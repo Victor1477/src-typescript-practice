@@ -1,0 +1,23 @@
+{
+  "name": "src-typescript-practice",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc --watch",
+    "start": "nodemon dist/server.js",
+    "server": "tsc && node dist/server.js"
+  },
+  "author": "Joao Oliveira",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.12",
+    "axios": "^1.7.2",
+    "express": "^4.19.2",
+    "mysql2": "^3.9.7",
+    "nodemon": "^3.1.0",
+    "typescript": "^5.4.5"
+  }
+}
