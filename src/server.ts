@@ -2,8 +2,8 @@ console.clear();
 
 export class Node<T> {
   public value: T;
-  public next: Node<T>;
-  public previous: Node<T>;
+  public next: Node<T> | null;
+  public previous: Node<T> | null;
 
   constructor(value: T) {
     this.value = value;
@@ -11,8 +11,8 @@ export class Node<T> {
 }
 
 export class DoublyLinkedList<T> {
-  private head: Node<T>;
-  private tail: Node<T>;
+  private head: Node<T> | null;
+  private tail: Node<T> | null;
   public length: number;
 
   constructor() {
@@ -26,17 +26,32 @@ export class DoublyLinkedList<T> {
       this.tail = node;
     } else {
       node.previous = this.tail;
-      this.tail.next = node;
+      this.tail!.next = node;
       this.tail = node;
     }
     this.length++;
+  }
+
+  pop() {
+    if (!this.head) return undefined;
+    const currentTail = this.tail!;
+    if (this.length > 1) {
+      this.tail = currentTail.previous!;
+      this.tail.next = null;
+    }
+    this.length--;
+    if (this.length === 0) {
+      this.head = null;
+      this.tail = null;
+    }
+    return currentTail.value;
   }
 
   forEach(callback: (value: T) => void) {
     let currentItem = this.head;
     while (currentItem) {
       callback(currentItem.value);
-      currentItem = currentItem.next;
+      currentItem = currentItem.next!;
     }
   }
 }
@@ -46,6 +61,8 @@ const list = new DoublyLinkedList<number>();
 for (let i = 0; i <= 5; i++) {
   list.push(i);
 }
+
+console.log(list.pop());
 
 list.forEach((value) => {
   console.log(value);
