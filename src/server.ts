@@ -77,6 +77,23 @@ export class DoublyLinkedList<T> {
     return currentHead.value;
   }
 
+  get(index: number) {
+    if (index < 0 || index >= this.length) return null;
+    if (index < this.length / 2) {
+      let currentItem = this.head;
+      for (let i = 1; i <= index; i++) {
+        currentItem = currentItem!.next;
+      }
+      return currentItem!.value;
+    } else {
+      let currentItem = this.tail;
+      for (let i = this.length - 2; i >= index; i--) {
+        currentItem = currentItem!.previous;
+      }
+      return currentItem!.value;
+    }
+  }
+
   forEach(callback: (value: T) => void) {
     let currentItem = this.head;
     while (currentItem) {
@@ -92,7 +109,7 @@ for (let i = 0; i <= 5; i++) {
   list.unshift(i);
 }
 
-console.log(list.shift());
+console.log(list.get(5));
 
 console.log("-------------------------------------");
 list.forEach((value) => {
