@@ -44,7 +44,24 @@ export class DoublyLinkedList<T> {
       this.head = null;
       this.tail = null;
     }
+    currentTail.previous = null;
     return currentTail.value;
+  }
+
+  shift() {
+    if (!this.head) return undefined;
+    const currentHead = this.head;
+    if (this.length > 1) {
+      this.head = currentHead.next;
+      this.head!.previous = null;
+      currentHead.next = null;
+    }
+    this.length--;
+    if (this.length === 0) {
+      this.head = null;
+      this.tail = null;
+    }
+    return currentHead.value;
   }
 
   forEach(callback: (value: T) => void) {
@@ -62,7 +79,9 @@ for (let i = 0; i <= 5; i++) {
   list.push(i);
 }
 
-console.log(list.pop());
+console.log(list.shift());
+
+console.log("-------------------------------------");
 
 list.forEach((value) => {
   console.log(value);
