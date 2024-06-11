@@ -48,6 +48,19 @@ export class DoublyLinkedList<T> {
     return currentTail.value;
   }
 
+  unshift(value: T) {
+    const node = new Node<T>(value);
+    if (this.length === 0) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      node.next = this.head;
+      this.head!.previous = node;
+      this.head = node;
+    }
+    this.length++;
+  }
+
   shift() {
     if (!this.head) return undefined;
     const currentHead = this.head;
@@ -76,13 +89,12 @@ export class DoublyLinkedList<T> {
 const list = new DoublyLinkedList<number>();
 
 for (let i = 0; i <= 5; i++) {
-  list.push(i);
+  list.unshift(i);
 }
 
 console.log(list.shift());
 
 console.log("-------------------------------------");
-
 list.forEach((value) => {
   console.log(value);
 });
