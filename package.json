@@ -2,6 +2,7 @@
   "name": "src-typescript-practice",
   "version": "1.0.0",
   "main": "dist/main.js",
+  "type": "module",
   "scripts": {
     "build": "tsc --watch",
     "start": "tsc && nodemon dist/main.js"
