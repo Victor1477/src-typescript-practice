@@ -116,7 +116,7 @@
 
 <body>
     <div class='light-control section'>
-        <h1>Lâmpada</h1>
+        <h1></h1>
         <button class='turn_on action-btn'>ON</button>
         <button class='turn_off action-btn'>OFF</button>
     </div>
@@ -134,6 +134,8 @@
         const btnOff = document.querySelector('.turn_off');
         const btnPrevious = document.querySelector('.previous');
         const btnNext = document.querySelector('.next');
+
+        h1.innerText = light;
 
         function validateShowNavBtns(h1ElementTextContent) {
             if (h1ElementTextContent == light) {
