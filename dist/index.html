@@ -17,25 +17,80 @@
             background-color: rgb(200, 200, 200);
         }
 
+        .section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+        }
+
+        h1 {
+            font-family: monospace;
+            letter-spacing: 0.1rem;
+            font-size: 5rem;
+            margin-bottom: 10rem;
+        }
+
         button {
-            margin: 5rem;
-            border-radius: 4rem;
             font-size: 3rem;
             font-weight: 900;
             font-family: monospace;
-            letter-spacing: 0.1rem;
             text-shadow: 0px 0px 1px black;
             border: none;
+        }
+
+        .action-btn {
+            margin: 4rem 0;
+            border-radius: 4rem;
+            letter-spacing: 0.1rem;
             width: 32rem;
             padding: 4rem;
             box-shadow: 0px 0px 3rem black;
         }
 
-        button:active {
-            animation: btn-transition 200ms;
+        .action-btn:active {
+            animation: action-btn-transition 200ms;
         }
 
-        @keyframes btn-transition {
+        .nav_buttons {
+            margin-top: 10rem;
+            display: grid;
+            grid-template-rows: 3rem;
+            gap: 10rem;
+            grid-template-columns: 13rem 13rem;
+        }
+
+        .nav_btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            width: 100%;
+            height: 100%;
+            padding: 6rem 0;
+            background-color: transparent;
+        }
+
+        .hide {
+            visibility: hidden;
+        }
+
+        .nav_btn:active {
+            animation: nav-btn-transition 200ms;
+        }
+
+        @keyframes nav-btn-transition {
+            0% {
+                font-size: 5rem;
+            }
+
+            100% {
+                font-size: 3rem;
+            }
+        }
+
+        @keyframes action-btn-transition {
             0% {
                 font-size: 4rem;
                 padding: 3.4rem;
@@ -60,10 +115,38 @@
 </head>
 
 <body>
-    <button class='turn_on'>ON</button>
-    <button class='turn_off'>OFF</button>
+    <div class='light-control section'>
+        <h1>Lâmpada</h1>
+        <button class='turn_on action-btn'>ON</button>
+        <button class='turn_off action-btn'>OFF</button>
+    </div>
+    <nav class='nav_buttons'>
+        <button class='nav_btn previous'>
+            < </button>
+                <button class='nav_btn next'> > </button>
+    </nav>
 
     <script>
+        const light = 'Lâmpada', outlet = 'Tomada';
+
+        const h1 = document.querySelector('h1');
+        const btnOn = document.querySelector('.turn_on');
+        const btnOff = document.querySelector('.turn_off');
+        const btnPrevious = document.querySelector('.previous');
+        const btnNext = document.querySelector('.next');
+
+        function validateShowNavBtns(h1ElementTextContent) {
+            if (h1ElementTextContent == light) {
+                btnPrevious.classList.add('hide');
+                btnNext.classList.remove('hide');
+            } else if (h1ElementTextContent == outlet) {
+                btnNext.classList.add('hide');
+                btnPrevious.classList.remove('hide');
+            }
+        }
+
+        validateShowNavBtns(h1.innerText)
+
         function sendRequest(path) {
             fetch(path, { method: 'GET' }).then((req) => {
                 if (req) {
@@ -72,15 +155,40 @@
             });
         }
 
-        const btnOn = document.querySelector('.turn_on');
-        const btnOff = document.querySelector('.turn_off');
+        btnPrevious.addEventListener('click', () => {
+            h1.innerText = light;
+            validateShowNavBtns(h1.innerText)
+        })
+
+        btnNext.addEventListener('click', () => {
+            h1.innerText = outlet;
+            validateShowNavBtns(h1.innerText)
+        })
 
         btnOn.addEventListener('click', () => {
-            sendRequest('/H');
+            switch (h1.innerText) {
+                case light: {
+                    sendRequest('/H1');
+                    break;
+                }
+                case outlet: {
+                    sendRequest('/H2');
+                    break;
+                }
+            }
         })
 
         btnOff.addEventListener('click', () => {
-            sendRequest('/L')
+            switch (h1.innerText) {
+                case light: {
+                    sendRequest('/L1');
+                    break;
+                }
+                case outlet: {
+                    sendRequest('/L2');
+                    break;
+                }
+            }
         })
     </script>
 </body>
