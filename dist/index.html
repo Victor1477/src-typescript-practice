@@ -64,16 +64,8 @@
     <button class='turn_off'>OFF</button>
 
     <script>
-        function turnOn() {
-            fetch('/H', { method: 'GET' }).then((req) => {
-                if (req) {
-                    console.log('Request Enviado com sucesso');
-                }
-            });
-        }
-
-        function turnOff() {
-            fetch('/L', { method: 'GET' }).then((req) => {
+        function sendRequest(path) {
+            fetch(path, { method: 'GET' }).then((req) => {
                 if (req) {
                     console.log('Request Enviado com sucesso');
                 }
@@ -84,11 +76,11 @@
         const btnOff = document.querySelector('.turn_off');
 
         btnOn.addEventListener('click', () => {
-            turnOn();
+            sendRequest('/H');
         })
 
         btnOff.addEventListener('click', () => {
-            turnOff();
+            sendRequest('/L')
         })
     </script>
 </body>
