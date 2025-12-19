@@ -3,16 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
+const fs_1 = __importDefault(require("fs"));
 console.clear();
-const app = (0, express_1.default)();
-var SERVER_CONFIGURATION;
-(function (SERVER_CONFIGURATION) {
-    SERVER_CONFIGURATION[SERVER_CONFIGURATION["PORT"] = 4202] = "PORT";
-})(SERVER_CONFIGURATION || (SERVER_CONFIGURATION = {}));
-app.use("/", (req, res, next) => {
-    res.send({ message: "Sucess" });
+const orders = [];
+var fileContent = "";
+orders.forEach((order) => {
+    if (order.status === "ERROR_OV_CREATION")
+        fileContent += `"consignment-process_a${order.order}_${order.order}",\n`;
 });
-app.listen(SERVER_CONFIGURATION.PORT, () => {
-    console.log(`Server listening on port ${SERVER_CONFIGURATION.PORT}`);
-});
+fs_1.default.writeFileSync("orders.txt", fileContent);

@@ -1,17 +1,14 @@
-import express from "express";
+import fs from "fs";
 
 console.clear();
 
-const app = express();
+const orders = [];
 
-enum SERVER_CONFIGURATION {
-  PORT = 4202,
-}
+var fileContent = "";
 
-app.use("/", (req, res, next) => {
-  res.send({ message: "Sucess" });
+orders.forEach((order) => {
+  if (order.status === "ERROR_OV_CREATION")
+    fileContent += `"consignment-process_a${order.order}_${order.order}",\n`;
 });
 
-app.listen(SERVER_CONFIGURATION.PORT, () => {
-  console.log(`Server listening on port ${SERVER_CONFIGURATION.PORT}`);
-});
+fs.writeFileSync("orders.txt", fileContent);
