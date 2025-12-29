@@ -1,13 +1,12 @@
 import fs from "fs";
+import orders from "../orders.json";
 
 console.clear();
-
-const orders = [];
 
 var fileContent = "";
 
 orders.forEach((order) => {
-  if (order.status === "ERROR_OV_CREATION")
+  if (order.status === "ERROR_RESERVE_DEVICE")
     fileContent += `"consignment-process_a${order.order}_${order.order}",\n`;
 });
 
