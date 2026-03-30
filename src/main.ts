@@ -19,15 +19,15 @@ ModelService modelService = spring.getBean("modelService");
 
 String[] processCodes = [\n`;
 
-orders.forEach((order) => {
-  if (order.status === Configuration.ORDER_STATUS) {
-    if (orders[orders.length - 1] !== order) {
+orders
+  .filter((order) => order.status === Configuration.ORDER_STATUS)
+  .forEach((order, index, array) => {
+    if (index !== array.length - 1) {
       fileContent += `"consignment-process_a${order.order}_${order.order}",\n`;
     } else {
       fileContent += `"consignment-process_a${order.order}_${order.order}"`;
     }
-  }
-});
+  });
 
 fileContent += `\n]
 
